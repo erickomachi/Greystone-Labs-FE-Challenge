@@ -28,7 +28,6 @@ const CreateUser = () => {
     };
 
     const response = await fetch(`${API_URL}/users`, requestObject);
-    console.log(response.status);
     if (response.status !== 200) {
       setIsSuccess(false);
     }
