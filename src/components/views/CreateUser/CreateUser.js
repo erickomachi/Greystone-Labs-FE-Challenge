@@ -3,6 +3,7 @@ import { Container, Paper } from "@material-ui/core"
 import { Grid, Button } from "@material-ui/core"
 import FormTextField from '@components/helper/forms/FormTextField';
 import './CreateUser.css';
+import { API_URL } from '../../../data/settings';
 
 const defaultValue = {
   username: ''
@@ -13,7 +14,17 @@ const CreateUser = () => {
   const { handleSubmit, control } = methods;
   
   const onSubmit = async(data) => {
-    console.log(data);
+    const requestObject = {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(data)
+    };
+
+    const response = await fetch(`${API_URL}/users`, requestObject);
+    console.log(response.status);
   }
 
   return (
