@@ -1,0 +1,8 @@
+.base {
+  text-align: center;
+}
+
+.align-left {
+  display: inline-block; 
+  text-align: left;
+}
