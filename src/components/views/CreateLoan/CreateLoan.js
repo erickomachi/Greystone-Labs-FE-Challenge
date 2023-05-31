@@ -2,22 +2,44 @@ import { useForm } from 'react-hook-form';
 import { Container, Paper } from "@material-ui/core"
 import { Grid, Button, Snackbar } from "@material-ui/core"
 import FormTextField from '@components/helper/forms/FormTextField';
+import FormDropdown from '@components/helper/forms/FormDropdown';
 import { API_URL } from '../../../data/settings';
 import { useState } from 'react';
 import SnackbarAlert from '@components/helper/alerts/SnackbarAlert';
 import './CreateLoan.css'
 
+const statusDropdownValues = [
+  {
+    label: "active",
+    value: "active"
+  },
+  {
+    label: "inactive",
+    value: "inactive"
+  }
+];
+
 const defaultValues = {
-  amount: 0,
-  apr: 0,
-  term: 0,
-  status: "",
-  owner_id: 0
+  amount: NaN,
+  apr: '',
+  term: '',
+  status: statusDropdownValues[0].value,
+  owner_id: ''
 };
+
+const rules = {
+  moreThan0: {
+    min: {
+      value: 1,
+      message: 'Value must be  greater than 0'
+    }
+  }
+}
 
 const CreateLoan = () => {
   const [receivedResponse, setReceivedResponse] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [isFormValid, setIsFormValid] = useState(false)
   const methods = useForm({ defaultValues: defaultValues });
   const { handleSubmit, control } = methods;
   
@@ -50,24 +72,24 @@ const CreateLoan = () => {
         </SnackbarAlert>
       </Snackbar>
       <Paper>
-        <p>Create a loan</p>
+        <div>Create a loan</div>
 
         <form onSubmit={handleSubmit(onSubmit)} className='align-left'>
           <Grid container direction='column' spacing={1}>
             <Grid item>
-              <FormTextField name='amount' control={control} label="Amount" />
+              <FormTextField name='amount' control={control} label="Amount" required={true} type='number' rules={rules.moreThan0}/>
             </Grid>
             <Grid item>
-              <FormTextField name='apr' control={control} label="APR" />
+              <FormTextField name='apr' control={control} label="APR" required={true} type='number' rules={rules.moreThan0}/>
             </Grid>
             <Grid item>
-              <FormTextField name='term' control={control} label="term" />
+              <FormTextField name='term' control={control} label="term" required={true} type='number' rules={rules.moreThan0}/>
             </Grid>
             <Grid item>
-              <FormTextField name='status' control={control} label="Status" />
+              <FormDropdown name='status' control={control} label="Status" options={statusDropdownValues} required={true}/>
             </Grid>
             <Grid item>
-              <FormTextField name='owner_id' control={control} label="This loan is for..." />
+              <FormTextField name='owner_id' control={control} label="This loan is for..." required={true}/>
             </Grid>
             <Grid item>
               <Button variant='contained' color={'primary'} type='submit'>
