@@ -5,7 +5,7 @@ import { useFormContext, Controller } from "react-hook-form";
 const emptyOptions = [
   {
     label: "Loading...",
-    value: "1",
+    value: "",
   }
 ];
 
@@ -21,11 +21,11 @@ const FormDropdown = ({ name, control, label, options=emptyOptions, ...props}) =
   };
 
   return (
-    <FormControl required={props.required}>
+    <FormControl required={props.required} style={props.style ? props.style : {}}>
       <InputLabel>{label}</InputLabel>
       <Controller
         render={({ field: { onChange, value } }) => (
-          <Select onChange={onChange} value={value} displayEmpty>
+          <Select onChange={onChange} value={value}>
             {generateSingleOptions()}
           </Select>
         )}

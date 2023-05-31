@@ -19,8 +19,7 @@ const FormTextField = ({ name, control, label, ...props }) => {
           onChange={onChange}
           value={value}
           label={label}
-          required={props.required}
-          type={props.type ? props.type : 'text'}
+          {...props}
         />
       )}
     />
