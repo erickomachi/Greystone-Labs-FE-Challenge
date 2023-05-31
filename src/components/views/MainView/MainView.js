@@ -1,7 +1,7 @@
 import './MainView.css';
 import { Route } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
-import CreateUser from '@components/CreateUser/CreateUser';
+import CreateUser from '@components/views/CreateUser/CreateUser';
 
 function MainView() {
   return (

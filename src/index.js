@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/core';
 import {CssBaseline} from '@material-ui/core';
 import theme from './theme';
 import { BrowserRouter } from 'react-router-dom';
-import MainView from '@components/MainView/MainView';
+import MainView from '@components/views/MainView/MainView';
 
 
 
