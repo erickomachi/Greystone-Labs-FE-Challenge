@@ -5,14 +5,14 @@ const theme = createTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#D46A6A',
-      light: '#61dafb',
-      dark: '#801515',
+      main: '#1F3425',
+      light: '#76897B',
+      dark: '#1F3425',
     },
     secondary: {
-      main: '#ECAAD3',
-      light: '#61dafb',
-      dark: '#8D3D6F',
+      main: '#505661',
+      light: '#626E71',
+      dark: '#313D40',
     },
     error: {
       main: red.A400,
@@ -37,6 +37,11 @@ const theme = createTheme({
         margin: '5px',
       },
     },
+    MuiContainer: {
+      root: {
+        textAlign: 'center'
+      }
+    }
   },
 });
 export default theme;
