@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { FormControl, InputLabel, MenuItem, Select, ListSubheader, TextField, InputAdornment } from "@material-ui/core";
 import { Controller } from "react-hook-form";
 
@@ -6,16 +6,17 @@ import { Controller } from "react-hook-form";
 const emptyOptions = [
   {
     label: 'Loading...',
-    value: '1',
+    value: '',
   }
 ];
 const containsText = (text, searchText) => text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
 
 const FormDropdownSearch = ({ name, control, label, options=emptyOptions, ...props}) => {
   const [searchText, setSearchText] = useState('');
+  const [displayOptions, setDisplayOptions] = useState(options)
 
   const displayedOptions = useMemo(
-    () => options.filter((option) => containsText(option.label, searchText)),
+    () => displayOptions.filter((option) => containsText(option.label, searchText)),
     [searchText]
   );
 
@@ -25,7 +26,7 @@ const FormDropdownSearch = ({ name, control, label, options=emptyOptions, ...pro
       <InputLabel>{label}</InputLabel>
       <Controller
         render={({ field: { onChange, value } }) => (
-          <Select  onChange={onChange} value={value} MenuProps={{ autoFocus: false }} onClose={() => setSearchText('')} labelId="search-select-label" id="search-select" >
+          <Select onChange={onChange} value={value} MenuProps={{ autoFocus: false }} onClose={() => setSearchText('')} labelId="search-select-label" id="search-select" displayEmpty>
             <ListSubheader>
               <TextField
                 autoFocus
@@ -44,7 +45,7 @@ const FormDropdownSearch = ({ name, control, label, options=emptyOptions, ...pro
             {
               displayedOptions.map((option) =>(
               <MenuItem key={option.value} value={option.value} size={props.size}>
-                  {option.label}
+                  {`${option.label}  (User ID: ${option.value})`}
               </MenuItem>
               ))
             }
