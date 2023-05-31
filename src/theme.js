@@ -21,6 +21,9 @@ const theme = createTheme({
       default: '#586c5d',
     },
   },
+  typography: {
+    fontSize: 16,
+  },
   overrides: {
     MuiPaper: {
       root: {
