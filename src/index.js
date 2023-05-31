@@ -1,13 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import MainView from './components/MainView/MainView';
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@material-ui/core';
+import {CssBaseline} from '@material-ui/core';
+import theme from './theme';
+import { BrowserRouter } from 'react-router-dom';
+import MainView from '@components/MainView/MainView';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <MainView />
+    <ThemeProvider theme={theme}>
+      <CssBaseline>
+      <BrowserRouter>
+        <MainView/>
+      </BrowserRouter>
+      </CssBaseline>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
