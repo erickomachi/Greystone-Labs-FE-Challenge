@@ -1,15 +1,19 @@
 import { useForm } from 'react-hook-form';
 import { Container, Paper } from "@material-ui/core"
-import { Grid, Button } from "@material-ui/core"
+import { Grid, Button, Snackbar } from "@material-ui/core"
 import FormTextField from '@components/helper/forms/FormTextField';
 import './CreateUser.css';
 import { API_URL } from '../../../data/settings';
+import { useState } from 'react';
+import SnackbarAlert from '@components/helper/alerts/SnackbarAlert';
 
 const defaultValue = {
   username: ''
 };
 
 const CreateUser = () => {
+  const [receivedResponse, setReceivedResponse] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const methods = useForm({ defaultValues: defaultValue });
   const { handleSubmit, control } = methods;
   
@@ -25,10 +29,22 @@ const CreateUser = () => {
 
     const response = await fetch(`${API_URL}/users`, requestObject);
     console.log(response.status);
+    if (response.status !== 200) {
+      setIsSuccess(false);
+    }
+    else {
+      setIsSuccess(true);
+    }
+    setReceivedResponse(true);
   }
 
   return (
     <Container maxWidth='md' disableGutters={false}>
+      <Snackbar open={receivedResponse} autoHideDuration={2000} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}} onClose={() => setReceivedResponse(false)}>
+        <SnackbarAlert onClose={() => setReceivedResponse(false)} severity={isSuccess ? 'success' : 'error'} sx={{ width: '100%' }}>
+          {isSuccess ? `User created!` : `An error has occured!`}
+        </SnackbarAlert>
+      </Snackbar>
       <Paper>
         <header>Hello! Welcome to the Loan Amortization App!</header>
         <p>In order to start, please create a new User.</p>
