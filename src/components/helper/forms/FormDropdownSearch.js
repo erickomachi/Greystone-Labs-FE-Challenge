@@ -45,7 +45,7 @@ const FormDropdownSearch = ({ name, control, label, options=emptyOptions, ...pro
             {
               displayedOptions.map((option) =>(
               <MenuItem key={option.value} value={option.value} size={props.size}>
-                  {`${option.label}  (User ID: ${option.value})`}
+                  {`${option.label}  ${!option.label.includes("Loan ID:") ? `(User ID: ${option.value})` : `` }`}
               </MenuItem>
               ))
             }
