@@ -29,7 +29,8 @@ const theme = createTheme({
       root: {
         padding: '20px 20px',
         margin: '0px',
-        // backgroundColor: '#fff', 
+        height: '100%',
+        minHeight: '100%'
       },
     },
     MuiButton: {
@@ -39,7 +40,8 @@ const theme = createTheme({
     },
     MuiContainer: {
       root: {
-        textAlign: 'center'
+        textAlign: 'center',
+        height: '100vh'
       }
     },
     MuiTableRow: {
