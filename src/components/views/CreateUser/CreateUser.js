@@ -51,7 +51,7 @@ const CreateUser = () => {
         <form onSubmit={handleSubmit(onSubmit)} className='align-left'>
           <Grid container direction='column' spacing={1}>
             <Grid item>
-              <FormTextField name='username' control={control} label="User Name" />
+              <FormTextField name='username' control={control} label="User Name" required={true}/>
             </Grid>
             <Grid item>
               <Button variant='contained' color={'primary'} type='submit'>
