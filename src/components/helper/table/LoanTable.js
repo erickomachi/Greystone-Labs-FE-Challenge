@@ -31,7 +31,7 @@ const defaultValues = [{
   term: 0
 }];
 
-const LoanTable = ({ values=defaultValues, userIds, userId }) => {
+const LoanTable = ({ values=defaultValues, userIds, userId, handleSelectedLoan }) => {
 
   const [tableValues, setTableValues] = useState(values)
 
@@ -50,7 +50,7 @@ const LoanTable = ({ values=defaultValues, userIds, userId }) => {
           <TableRow>
             <TableCell align="right">Loan Amount ($)</TableCell>
             <TableCell align="right">APR</TableCell>
-            <TableCell align="right">Term Number</TableCell>
+            <TableCell align="right">Terms (Months)</TableCell>
             <TableCell align="right">Status</TableCell>
             <TableCell align="right">Loan ID</TableCell>
             <TableCell align="right">Owned by Self?</TableCell>
@@ -59,8 +59,10 @@ const LoanTable = ({ values=defaultValues, userIds, userId }) => {
         <TableBody>
           {tableValues.map((row) => (
             <TableRow
-              key={row.name}
+              key={`${row.id}-${row.amount}`}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              hover
+              onClick={() => handleSelectedLoan({loan_id: row.id, self_owned: row.selfOwned})}
             >
               <TableCell align="right">{row.amount}</TableCell>
               <TableCell align="right">{row.apr}</TableCell>
