@@ -27,9 +27,9 @@ const theme = createTheme({
   overrides: {
     MuiPaper: {
       root: {
-        padding: '20px 10px',
-        margin: '10px',
-        backgroundColor: '#fff', 
+        padding: '20px 20px',
+        margin: '0px',
+        // backgroundColor: '#fff', 
       },
     },
     MuiButton: {
@@ -41,7 +41,13 @@ const theme = createTheme({
       root: {
         textAlign: 'center'
       }
+    },
+    MuiTableRow: {
+      root: {
+        borderColor: '#1F3425'
+      }
     }
+
   },
 });
 export default theme;
