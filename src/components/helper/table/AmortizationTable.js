@@ -10,6 +10,11 @@ import {
 } from '@mui/material/';
 
 const createRowData = (month, open_balance, total_payment, principal_payment, interest_payment, close_balance) => {
+  open_balance = Math.round(open_balance * 100) / 100
+  total_payment = Math.round(total_payment * 100) / 100
+  principal_payment = Math.round(principal_payment * 100) / 100
+  interest_payment = Math.round(interest_payment * 100) / 100
+  close_balance = Math.round(close_balance * 100) / 100
   return { month, open_balance, total_payment, principal_payment, interest_payment, close_balance };
 }
 
@@ -24,11 +29,12 @@ const defaultValues = [{
 
 const AmortizationTable = ({ values = defaultValues }) => {
 
+  
   const [tableValues, setTableValues] = useState(values)
 
   useEffect(() => {
     const formattedData = values.map((userValue) => {
-      return createRowData(...userValue)
+      return createRowData(userValue.month, userValue.open_balance, userValue.total_payment, userValue.principal_payment, userValue.interest_payment, userValue.close_balance)
     });
 
     setTableValues(formattedData);
@@ -40,17 +46,17 @@ const AmortizationTable = ({ values = defaultValues }) => {
         <TableHead>
           <TableRow>
             <TableCell align="right">Payment Month</TableCell>
-            <TableCell align="right">Balance</TableCell>
-            <TableCell align="right">Total Payment</TableCell>
-            <TableCell align="right">Principal Payment</TableCell>
-            <TableCell align="right">Interest Payment</TableCell>
-            <TableCell align="right">Closed Balance</TableCell>
+            <TableCell align="right">Balance ($)</TableCell>
+            <TableCell align="right">Total Payment ($)</TableCell>
+            <TableCell align="right">Principal Payment ($)</TableCell>
+            <TableCell align="right">Interest Payment ($)</TableCell>
+            <TableCell align="right">Closed Balance ($)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {tableValues.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.month}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="right">{row.month}</TableCell>
