@@ -45,7 +45,6 @@ const CreateLoan = () => {
   const { handleSubmit, control } = methods;
   
   const onSubmit = async(data) => {
-    console.log(data)
     const requestObject = {
       headers: {
         'Accept': 'application/json',
@@ -73,7 +72,6 @@ const CreateLoan = () => {
           return { label: user.username, value: user.id }
         })
         setUserIds(formattedData)
-        console.log(userIds)
       })
     }, [userIds[0].value]
   )

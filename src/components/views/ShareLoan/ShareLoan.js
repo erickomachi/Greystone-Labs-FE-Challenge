@@ -26,11 +26,10 @@ const ShareLoan = () => {
   
   const onSubmit = async(data) => {
     if(isSuccess) {
-      setIsSuccess(false)
-      reset()
+      setIsSuccess(false);
+      reset();
     }
     else {
-      console.log('sending data! ', data);
       const requestObject = {
         headers: {
           'Accept': 'application/json',
@@ -40,8 +39,7 @@ const ShareLoan = () => {
       };
   
       const response = await fetch(`${API_URL}/loans/${data.loan_id}/share?owner_id=${data.owner_id}&user_id=${data.user_id}`, requestObject);
-      const responseData = await response.json()
-      console.log('printing out response data: ', responseData)
+      const responseData = await response.json();
       if (!responseData.includes('success')) {
         setIsSuccess(false);
       }
@@ -50,7 +48,7 @@ const ShareLoan = () => {
       }
       setReceivedResponse(true);
     }
-  }
+  };
 
   useEffect(() => {
     fetch(`${API_URL}/users`)
@@ -60,33 +58,28 @@ const ShareLoan = () => {
           return { label: user.username, value: user.id }
         })
         setOwnerIds(formattedData)
-        console.log(ownerIds)
       })
     }, [ownerIds[0].value]
-  )
+  );
 
   useEffect(() => {
-    console.log("got a new owner! ", watchOwnerId)
     if (watchOwnerId) {
-      setLoanValues(undefined)
-      setUserIds(undefined)
+      setLoanValues(undefined);
+      setUserIds(undefined);
       fetch(`${API_URL}/users/${watchOwnerId}/loans`)
         .then((response) => response.json())
         .then((data) => {
-          console.log('printing out response data: ', data)
           const formattedData = data
             .filter((loanInfo) => loanInfo.owner_id === watchOwnerId)
             .map((loanInfo) => {
               return { label: `Loan ID: ${loanInfo.id} | $${loanInfo.amount} | term: ${loanInfo.term} | APR: ${loanInfo.apr} | ${loanInfo.status}`, value: loanInfo.id }
-            })
+            });
           setLoanValues(formattedData);
-          console.log("formatted data! ",  formattedData);
           const removeSelf = ownerIds.filter((owner) => owner.value !== watchOwnerId);
-          console.log("did I remove myself? ", removeSelf);
           setUserIds(removeSelf);
         })
     }
-  }, [watchOwnerId])
+  }, [watchOwnerId]);
 
   return (
     <Container maxWidth='md' disableGutters={false}>
