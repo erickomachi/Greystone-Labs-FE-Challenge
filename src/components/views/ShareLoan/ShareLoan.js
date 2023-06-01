@@ -83,13 +83,13 @@ const ShareLoan = () => {
 
   return (
     <Container maxWidth='md' disableGutters={false}>
-      <Snackbar open={receivedResponse} autoHideDuration={2000} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}} onClose={() => setReceivedResponse(false)}>
+      <Snackbar open={receivedResponse} autoHideDuration={2000} anchorOrigin={{horizontal: 'center', vertical: 'bottom'}} onClose={() => setReceivedResponse(false)}>
         <SnackbarAlert onClose={() => setReceivedResponse(false)} severity={isSuccess ? 'success' : 'error'} sx={{ width: '100%' }}>
           {isSuccess ? `Successfully shared ${ownerIds[getValues().owner_id-1].label}'s loan with ${ownerIds[getValues().user_id-1].label}!` : `An error has occured!`}
         </SnackbarAlert>
       </Snackbar>
       <Paper>
-        <div>Sharing a loan with another user</div>
+        <h3>Share a loan by filling out the required fields. The page will update as you fill out each field.</h3>
 
         <form onSubmit={handleSubmit(onSubmit)} className='align-left'>
           <Grid container direction='column' spacing={1}>
