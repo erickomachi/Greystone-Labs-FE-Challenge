@@ -42,26 +42,32 @@ const CreateLoan = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [userIds, setUserIds] = useState([{label: 'loading...', value: ''}]);
   const methods = useForm({ defaultValues: defaultValues });
-  const { handleSubmit, control } = methods;
+  const { handleSubmit, control, reset } = methods;
   
-  const onSubmit = async(data) => {
-    const requestObject = {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(data)
-    };
-
-    const response = await fetch(`${API_URL}/loans`, requestObject);
-    if (response.status !== 200) {
+  const onSubmit = async (data) => {
+    if (isSuccess) {
       setIsSuccess(false);
+      reset();
     }
     else {
-      setIsSuccess(true);
+      const requestObject = {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(data)
+      };
+
+      const response = await fetch(`${API_URL}/loans`, requestObject);
+      if (response.status !== 200) {
+        setIsSuccess(false);
+      }
+      else {
+        setIsSuccess(true);
+      }
+      setReceivedResponse(true);
     }
-    setReceivedResponse(true);
   }
 
   useEffect(() => {
@@ -78,13 +84,13 @@ const CreateLoan = () => {
 
   return (
     <Container maxWidth='md' disableGutters={false}>
-      <Snackbar open={receivedResponse} autoHideDuration={2000} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}} onClose={() => setReceivedResponse(false)}>
+      <Snackbar open={receivedResponse} autoHideDuration={2000} anchorOrigin={{horizontal: 'center', vertical: 'bottom'}} onClose={() => setReceivedResponse(false)}>
         <SnackbarAlert onClose={() => setReceivedResponse(false)} severity={isSuccess ? 'success' : 'error'} sx={{ width: '100%' }}>
           {isSuccess ? `Loan created!` : `An error has occured!`}
         </SnackbarAlert>
       </Snackbar>
       <Paper>
-        <div>Create a loan</div>
+        <h3>Create a loan by filling out the field below and clicking submit.</h3>
 
         <form onSubmit={handleSubmit(onSubmit)} className='align-left'>
           <Grid container direction='column' spacing={1}>
@@ -105,7 +111,7 @@ const CreateLoan = () => {
             </Grid>
             <Grid item>
               <Button variant='contained' color={'primary'} type='submit'>
-                Submit
+                {isSuccess ? `Reset` : `Submit`}
               </Button>
             </Grid>
           </Grid>
