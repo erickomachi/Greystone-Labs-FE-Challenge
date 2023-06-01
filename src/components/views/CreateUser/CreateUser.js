@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { Container, Paper } from "@material-ui/core"
 import { Grid, Button, Snackbar } from "@material-ui/core"
 import FormTextField from '@components/helper/forms/FormTextField';
-import './CreateUser.css';
 import { API_URL } from '../../../data/settings';
 import { useState } from 'react';
 import SnackbarAlert from '@components/helper/alerts/SnackbarAlert';

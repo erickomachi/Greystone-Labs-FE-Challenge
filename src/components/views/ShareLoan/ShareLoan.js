@@ -5,7 +5,6 @@ import FormDropdownSearch from '@components/helper/forms/FormDropdownSearch';
 import { API_URL } from '../../../data/settings';
 import { useState, useEffect } from 'react';
 import SnackbarAlert from '@components/helper/alerts/SnackbarAlert';
-import './ShareLoan.css'
 
 const defaultValues = {
   user_id: '',

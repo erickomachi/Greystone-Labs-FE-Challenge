@@ -1,4 +1,3 @@
-// import './MainView.css';
 import { Grid, Container } from "@mui/material";
 
 import { Route, Routes } from 'react-router-dom';
