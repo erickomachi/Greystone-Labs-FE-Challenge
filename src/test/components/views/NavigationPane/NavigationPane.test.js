@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import NavigationPane from '../../../../components/views/NavigationPane/NavigationPane'
+import NavigationPane from '@components/views/NavigationPane/NavigationPane'
 
 describe("NavigationPane test", () => {
 

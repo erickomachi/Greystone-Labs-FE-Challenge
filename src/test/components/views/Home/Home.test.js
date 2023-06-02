@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import Home from '../../../../components/views/Home/Home'
+import Home from '@components/views/Home/Home'
 
 describe("Home test", () => {
 

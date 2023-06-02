@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import MainView from '../../../../components/views/MainView/MainView'
+import MainView from '@components/views/MainView/MainView'
 
 
 describe("MainView test", () => {
