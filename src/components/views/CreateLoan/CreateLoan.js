@@ -1,3 +1,4 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Container, Paper } from "@material-ui/core"
 import { Grid, Button, Snackbar } from "@material-ui/core"
@@ -32,7 +33,7 @@ const rules = {
   moreThan0: {
     min: {
       value: 1,
-      message: 'Value must be  greater than 0'
+      message: 'Value must be greater than 0'
     }
   }
 }

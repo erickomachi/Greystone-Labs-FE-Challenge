@@ -29,7 +29,6 @@ const theme = createTheme({
       root: {
         padding: '20px 20px',
         margin: '0px',
-        height: '100%',
         minHeight: 'auto'
       },
     },
