@@ -46,6 +46,7 @@ const CreateLoan = () => {
   const { handleSubmit, control, reset } = methods;
   
   const onSubmit = async (data) => {
+    console.log("in Onsubmit!")
     if (isSuccess) {
       setIsSuccess(false);
       reset();
@@ -61,6 +62,7 @@ const CreateLoan = () => {
       };
 
       const response = await fetch(`${API_URL}/loans`, requestObject);
+      console.log("value of response is ", JSON.stringify(response, null, 2))
       if (response.status !== 200) {
         setIsSuccess(false);
       }
@@ -78,6 +80,7 @@ const CreateLoan = () => {
         const formattedData = data.map((user) => {
           return { label: user.username, value: user.id }
         })
+        console.log("value of data is: ", JSON.stringify(data, null, 2))
         setUserIds(formattedData)
       })
     }, [userIds[0].value]

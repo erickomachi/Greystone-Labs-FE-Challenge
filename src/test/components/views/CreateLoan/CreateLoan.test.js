@@ -2,28 +2,36 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import CreateLoan from '@components/views/CreateLoan/CreateLoan'
 import '@testing-library/jest-dom'
+import { enableFetchMocks } from 'jest-fetch-mock'
 
 
 describe("CreateLoan test", () => {
+  enableFetchMocks();
 
-  test('it should submit loan successfully', async() => {
-    // global.fetch = jest.fn().mockReturnValueOnce({status: 200});
-    // jest.useFakeTimers();
-    // render(<CreateLoan />);
-    // const input = screen.getByLabelText
-    // fireEvent.submit(screen.getByRole('button'));
-    // await screen.findAllByText(`User created!`);
-    // jest.advanceTimersByTime(3000);
+  beforeEach( () => {
+    fetch.resetMocks();
+  })
+  test('it should display "value must be greater than 0"', async () => {
+    fetch.mockResponse(JSON.stringify([{ username: 'test', id: 'test' }]))
 
-    // expect(fetch).toHaveBeenCalled();
+    render(<CreateLoan />);
+    const amountInput = screen.getAllByRole('spinbutton')[0];
+    fireEvent.change(amountInput, { target: { value: '0'}});
+    fireEvent.submit(screen.getAllByRole('button')[2]);
+    const value = await screen.findAllByText(`Value must be greater than 0`);
+
+    expect(value).toBeTruthy();
   })
 
-  // test('it should submit loan unsuccessfully', async() => {
-  //   global.fetch = jest.fn().mockReturnValueOnce({status: 422});
-  //   render(<CreateLoan />);
-  //   fireEvent.submit(screen.getByRole('button'));
-  //   await screen.findAllByText(`An error has occured!`);
+  test('it should submit loan successfully', async () => {
+    fetch.mockResponse(JSON.stringify([{ username: 'test', id: 'test' }]))
+    jest.useFakeTimers();
+    render(<CreateLoan />);
+    fireEvent.submit(screen.getAllByRole('button')[2]);
 
-  //   expect(fetch).toHaveBeenCalled();
-  // })
+    const value = await screen.findAllByText(`Loan created!`);
+    jest.advanceTimersByTime(3000);
+
+    expect(value).toBeTruthy()
+  })
 })
