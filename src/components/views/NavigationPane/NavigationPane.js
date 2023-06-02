@@ -1,4 +1,4 @@
-import { React } from "react"
+import React from "react"
 import styles from "./NavigationPane.module.css"
 import { Link } from "react-router-dom";
 import { Grid } from "@mui/material";
