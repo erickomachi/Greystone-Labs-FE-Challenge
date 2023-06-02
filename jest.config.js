@@ -9,6 +9,15 @@ module.exports = {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy"
   },
   setupFilesAfterEnv: [
+    "<rootDir>/src/setupEncoder.js",
     "<rootDir>/src/setupTests.js"
-  ]
+  ],
+  clearMocks: true,
+  collectCoverageFrom: ['src/**/*.{js,jsx,mjs}'],
+  coverageDirectory: 'coverage',
+  testEnvironment: 'jsdom',
+  globals: {
+    TextEncoder: require("util").TextEncoder,
+    TextDecoder: require("util").TextDecoder
+  }
 }
