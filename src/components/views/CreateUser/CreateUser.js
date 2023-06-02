@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { Container, Paper } from "@material-ui/core"
 import { Grid, Button, Snackbar } from "@material-ui/core"
 import FormTextField from '@components/helper/forms/FormTextField';
-import './CreateUser.css';
 import { API_URL } from '../../../data/settings';
 import { useState } from 'react';
 import SnackbarAlert from '@components/helper/alerts/SnackbarAlert';
@@ -39,14 +38,13 @@ const CreateUser = () => {
 
   return (
     <Container maxWidth='md' disableGutters={false}>
-      <Snackbar open={receivedResponse} autoHideDuration={2000} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}} onClose={() => setReceivedResponse(false)}>
+      <Snackbar open={receivedResponse} autoHideDuration={2000} anchorOrigin={{horizontal: 'center', vertical: 'bottom'}} onClose={() => setReceivedResponse(false)}>
         <SnackbarAlert onClose={() => setReceivedResponse(false)} severity={isSuccess ? 'success' : 'error'} sx={{ width: '100%' }}>
           {isSuccess ? `User created!` : `An error has occured!`}
         </SnackbarAlert>
       </Snackbar>
       <Paper>
-        <header>Hello! Welcome to the Loan Amortization App!</header>
-        <p>In order to start, please create a new User.</p>
+        <h3>Create a user by providing a user name and clicking submit.</h3>
 
         <form onSubmit={handleSubmit(onSubmit)} className='align-left'>
           <Grid container direction='column' spacing={1}>
