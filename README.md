@@ -52,3 +52,12 @@ submit until they are filled out.
 - Consistent styling with Material UI's `theme` engine.
 - Testing framework set up with `Enzyme` by overriding proper fields in `package.json`, installing the correct depedencies, and creating additional files for the sake of compatibility with `CRA`.
 - Simple test cases for most of the `.js` files.
+
+## Key Takeaways
+
+One thing that I enjoy doing is challenging myself when it comes to coding. This project was no different. I tried doing new things that I have not done before in order to learn more about React and Javascript since it is such a fast-paced tech stack. Here are two major things that I've learned:
+
+1. `useForm` hook and `MUI` Components
+    - These two frameworks do not play nicely without some configuration. `useForm` relies on an exposed `input`, which `MUI` obfuscates under the hook. I had to create a few helper Components that would wrap `useForm`'s `Controller` component with `MUI`'s components in order to get it to work. But now that I got it to work, that is extra knowledge that I can definitely take with me for both the `useForm` hook framework and `MUI` component framework, or other UI styling frameworks that also obfuscates the `input` element. 
+2. `Enzyme` and `Create React App`
+    - I learned that this was almost an unnecessary endeavor to get working as I learned that `Enzyme` has not been updated in a while. It only officially supports React 16, and this app uses React 18. I had to use an unofficial React 18 adapter, which also proved to be unnecessary because Enzyme does not place nicely with `MUI` components. Since `CRA` tries to handle all the web configurations from the developer, it was a very interesting experience trying to integrate certain features such as transforming `ESM` syntax to `CommonJS` without running the `eject` script built into `CRA`.
